@@ -41,3 +41,7 @@ pybase-install:
 .PHONY: install
 install: pybase-install
 	pip install -e ./stac_fastapi/mongo[dev,server]
+
+.PHONY: ingest
+ingest:
+	python3 data_loader/data_loader.py
