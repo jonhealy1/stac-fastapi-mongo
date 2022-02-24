@@ -1,18 +1,13 @@
-# stac-fastapi-nosql
+# stac-fastapi-mongo
 
-Elasticsearch and mongodb backends for stac-fastapi.
+Mongodb backend for stac-fastapi.
 
 ------
 #### Running API on localhost:8083
 
-```docker-compose -f docker-compose.mongo.yml up``` **or**
-
-```docker-compose -f docker-compose.elasticsearch.yml up```
+```docker-compose up```
 
 ------
 #### Testing
 
-
-```make test-mongo``` **or**
-
-```make test-es```
+```make test```
