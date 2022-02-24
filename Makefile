@@ -3,7 +3,7 @@ APP_HOST ?= 0.0.0.0
 APP_PORT ?= 8080
 EXTERNAL_APP_PORT ?= ${APP_PORT}
 
-run = docker-compose -f docker-compose.mongo.yml \
+run = docker-compose \
 				run \
 				-p ${EXTERNAL_APP_PORT}:${APP_PORT} \
 				-e PY_IGNORE_IMPORTMISMATCH=1 \
