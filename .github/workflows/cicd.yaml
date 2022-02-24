@@ -1,4 +1,4 @@
-name: stac-fastapi-nosql
+name: stac-fastapi-mongo
 on:
   push:
     branches: [ main, dev ]
@@ -18,18 +18,6 @@ jobs:
           MONGO_INITDB_ROOT_PASSWORD: stac
         ports:
           - 27018:27017
-
-      elasticsearch_db_service:
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.14.2
-        env:
-          node.name: es01
-          cluster.name: stac-cluster
-          discovery.type: single-node
-          network.host: 0.0.0.0
-          http.port: 9200
-          ES_JAVA_OPTS: -Xms512m -Xmx512m
-        ports:
-          - 9200:9200
       
     steps:
       - name: Check out repository code
@@ -52,10 +40,6 @@ jobs:
         run: |
           pip install ./stac_fastapi/mongo[dev,server]
 
-      - name: Install elasticsearch stac-fastapi
-        run: |
-          pip install ./stac_fastapi/elasticsearch[dev,server]
-
       - name: Run test suite
         run: |
           cd stac_fastapi/mongo && pipenv run pytest -svvv
@@ -65,13 +49,3 @@ jobs:
           MONGO_PASS: stac
           MONGO_PORT: 27018
           MONGO_HOST: localhost
-      
-      - name: Run test suite
-        run: |
-          cd stac_fastapi/elasticsearch && pipenv run pytest -svvv
-        env:
-          ENVIRONMENT: testing
-          ES_USER: dev
-          ES_PASS: stac
-          ES_PORT: 9200
-          ES_HOST: 172.17.0.1
