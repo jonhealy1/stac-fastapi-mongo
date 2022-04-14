@@ -43,6 +43,7 @@ class CoreCrudClient(BaseCoreClient):
     client = settings.create_client
     item_table = client.stac.stac_item
     collection_table = client.stac.stac_collection
+    error_check = ErrorChecks(client=client)
 
     @staticmethod
     def _lookup_id(id: str, table, session):
@@ -87,8 +88,7 @@ class CoreCrudClient(BaseCoreClient):
         base_url = str(kwargs["request"].base_url)
 
         with self.client.start_session(causal_consistency=True) as session:
-            error_check = ErrorChecks(session=session, client=self.client)
-            error_check._check_collection_not_found(collection_id)
+            self.error_check._check_collection_not_found(collection_id)
             collection = self.collection_table.find_one(
                 {"id": collection_id}, session=session
             )
@@ -141,8 +141,7 @@ class CoreCrudClient(BaseCoreClient):
         """Get item by item id, collection id."""
         base_url = str(kwargs["request"].base_url)
         with self.client.start_session() as session:
-            error_check = ErrorChecks(session=session, client=self.client)
-            error_check._check_item_not_found(item_id, collection_id)
+            self.error_check._check_item_not_found(item_id, collection_id)
             item = self.item_table.find_one(
                 {"id": item_id, "collection": collection_id}, session=session
             )
