@@ -77,8 +77,7 @@ class TransactionsClient(BaseTransactionsClient):
 
     def update_collection(self, model: stac_types.Collection, **kwargs):
         """Update collection."""
-        with self.client.start_session(causal_consistency=True) as session:
-            self.error_check._check_collection_not_found(model["id"])
+        self.error_check._check_collection_not_found(model["id"])
         self.delete_collection(model["id"])
         self.create_collection(model, **kwargs)
 
