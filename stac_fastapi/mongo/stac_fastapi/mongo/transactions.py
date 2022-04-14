@@ -115,14 +115,13 @@ class BulkTransactionsClient(BaseBulkTransactionsClient):
         ).create_links()
         model["links"] = item_links
 
-        with self.client.start_session(causal_consistency=True) as session:
-            error_check = ErrorChecks(session=session, client=self.client)
-            error_check._check_collection_foreign_key(model)
-            error_check._check_item_conflict(model)
-            now = datetime.utcnow().strftime(DATETIME_RFC339)
-            if "created" not in model["properties"]:
-                model["properties"]["created"] = str(now)
-            return model
+        error_check = ErrorChecks(client=self.client)
+        error_check._check_collection_foreign_key(model)
+        error_check._check_item_conflict(model)
+        now = datetime.utcnow().strftime(DATETIME_RFC339)
+        if "created" not in model["properties"]:
+            model["properties"]["created"] = str(now)
+        return model
 
     def bulk_item_insert(self, items: Items, **kwargs) -> str:
         """Bulk item insertion using mongodb and pymongo."""
