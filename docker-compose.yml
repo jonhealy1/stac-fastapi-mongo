@@ -12,7 +12,7 @@ services:
     environment:
       - APP_HOST=0.0.0.0
       - APP_PORT=8083
-      - RELOAD=false
+      - RELOAD=true
       - ENVIRONMENT=local
       - WEB_CONCURRENCY=10
       - MONGO_USER=dev
