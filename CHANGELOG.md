@@ -16,11 +16,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+- fixed docstring under the bulk transactions client referring to postgres https://github.com/jonhealy1/stac-fastapi-mongo/pull/9
+
 ### Changed
 
 - set docker-compose reload variable to true
 - instantiated error checks in classes
+- updated black to 22.6.0 https://github.com/jonhealy1/stac-fastapi-mongo/pull/9
 
 ### Removed
 
-- commented out push to pypi gh actions scripts
+- removed push to pypi gh actions scripts https://github.com/jonhealy1/stac-fastapi-mongo/pull/9
+- removed unused features folder in tests https://github.com/jonhealy1/stac-fastapi-mongo/pull/9

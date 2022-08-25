@@ -137,3 +137,5 @@ dmypy.json
 venv
 
 .DS_Store
+
+.vscode

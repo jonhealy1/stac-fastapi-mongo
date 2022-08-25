@@ -10,6 +10,7 @@ from stac_fastapi.types.errors import ConflictError, ForeignKeyError, NotFoundEr
 @attr.s
 class ErrorChecks:
     """error checks class."""
+
     client: MongoClient = attr.ib(default=None)
 
     def _check_collection_foreign_key(self, model: stac_types.Collection):
@@ -25,12 +26,7 @@ class ErrorChecks:
             raise ConflictError(f"Collection {model['id']} already exists")
 
     def _check_collection_not_found(self, collection_id: str):
-        if (
-            self.client.stac.stac_collection.count_documents(
-                {"id": collection_id}
-            )
-            == 0
-        ):
+        if self.client.stac.stac_collection.count_documents({"id": collection_id}) == 0:
             raise NotFoundError(f"Collection {collection_id} not found")
 
     def _check_item_conflict(self, model: stac_types.Item):
