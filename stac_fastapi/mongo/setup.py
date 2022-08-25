@@ -45,7 +45,7 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
     keywords="STAC FastAPI COG",
-    author=u"Arturo Engineering",
+    author="Arturo Engineering",
     author_email="engineering@arturo.ai",
     url="https://github.com/jonhealy1/stac-fastapi-mongo",
     license="MIT",
