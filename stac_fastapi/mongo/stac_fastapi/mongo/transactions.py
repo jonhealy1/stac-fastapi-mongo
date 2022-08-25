@@ -98,7 +98,7 @@ class TransactionsClient(BaseTransactionsClient):
 
 @attr.s
 class BulkTransactionsClient(BaseBulkTransactionsClient):
-    """Postgres bulk transactions."""
+    """Mongo bulk transactions."""
 
     session: Session = attr.ib(default=attr.Factory(Session.create_from_env))
 
