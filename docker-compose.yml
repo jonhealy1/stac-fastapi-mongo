@@ -18,7 +18,7 @@ services:
       - MONGO_USER=dev
       - MONGO_PASS=stac
       - MONGO_PORT=27017
-      - MONGO_HOST=172.17.0.1
+      - MONGO_HOST=mongo_db
     ports:
       - "8083:8083"
     volumes:
